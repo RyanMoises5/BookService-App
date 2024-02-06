@@ -5,8 +5,8 @@ const bookNames = [
    
 ];
 
-const searchInput = document.getElementById("search-input");
-const searchResults = document.getElementById("search-results");
+const searchInput = document.getElementById("#search-input");
+const searchResults = document.getElementById("#search-results");
 localStorage.setItem("myBooks", "")
 
 searchInput.addEventListener("input", handleSearch);

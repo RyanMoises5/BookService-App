@@ -1,12 +1,13 @@
-var searchTerm = $('#search-term');
-var submitBtn = $('#search-button');
+var searchTerm = $("#search-input");
+var submitBtn = $('#submit-button');
 var googleAPIKey = "AIzaSyApC_HmnBEAvRsbJdOI__0QIfXjbtebdwY";
+var searchResults = $('#search-results');
 
 function formSubmission (event) {
     event.preventDefault()
 
     var searchInput = searchTerm.val().trim();
-
+    console.log(searchInput);
     if (searchInput) {
         getData(searchInput);
     } else {
@@ -55,6 +56,8 @@ var displayResults = function(data) {
         resultsCard.append(bookTitle);
         resultsCard.append(bookAuthor);
         resultsCard.append(bookBorrow);
+
+        searchResults.append(resultsCard);
     }
 };
 
