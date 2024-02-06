@@ -1,0 +1,61 @@
+.container-out {
+    font-family: "Fira Sans", sans-serif;
+    padding: 15px 0;
+}
+.container-in {
+    width: 95%;
+    margin: 0 auto;
+}
+.search-container {
+    position: relative;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px;
+}
+.search-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #1ca0b8;
+}
+#search-input {
+    width: 90%;
+    padding: 13px;
+    border-radius: 4px;
+    border: 2px solid #1ca0b8;
+    font-size: 15px;
+}
+#search-input:focus {
+    outline: none;
+}
+#search-results {
+    position: absolute;
+    z-index: 10;
+    margin: 1px auto;
+    background: #1ca0b8;
+    width: 90%;
+    text-align: left;
+    border-radius: 4px;
+    border: 2px solid #1ca0b8;
+    display: none;
+}
+.search-item {
+    color: white;
+    cursor: pointer;
+}
+.search-item p {
+    margin: 0;
+    padding: 10px;
+}
+.search-item:hover {
+    background: #2cc7e2;
+}
+#search-data {
+    margin-top: 10px;
+    color: #1ca0b8;
+}
+#search-data p {
+    margin: 0;
+    padding: 6px;
+    font-size: 16px;
+}
