@@ -20,11 +20,13 @@ var getData = function (searchInput) {
     var searchInputArray = searchInput.split(" ");
     var searchInputAPI = searchInputArray[0];
 
+    searchResults.empty();
+
     for (let index = 1; index < searchInputArray.length; index++) {
         searchInputAPI = searchInputAPI + "+" + searchInputArray[index];
     }
 
-    var apiURL = 'https://openlibrary.org/search.json?q=' + searchInputAPI;
+    var apiURL = 'https://openlibrary.org/search.json?q=' + searchInputAPI + '&limit=10';
 
     fetch(apiURL)
         .then(function (response) {
@@ -47,8 +49,17 @@ var displayResults = function(data) {
 
         var resultsCard = $('<div>');
 
-        var bookTitle = $('<h2>');
+        var bookTitle = $('<a>');
         bookTitle.text("Title: " + data.docs[index].title);
+
+        var bookTitleArray = data.docs[index].title.split(" ");
+        var bookTitleURL = bookTitleArray[0];
+
+        for (let index = 1; index < bookTitleArray.length; index++) {
+            bookTitleURL = bookTitleURL + "+" + bookTitleArray[index];
+        }
+
+        bookTitle.attr('href', './Search-Display.html?title=' + bookTitleURL);
 
         var bookAuthor = $('<h3>');
         bookAuthor.text("Author: " + data.docs[index].author_name);
@@ -59,8 +70,6 @@ var displayResults = function(data) {
         resultsCard.append(bookTitle);
         resultsCard.append(bookAuthor);
         resultsCard.append(bookBorrow);
-
-        console.log(bookAuthor);
 
         searchResults.append(resultsCard);
     }
