@@ -1,6 +1,6 @@
+var googleAPIKey = "AIzaSyApC_HmnBEAvRsbJdOI__0QIfXjbtebdwY";
 var searchTerm = $("#search-input");
 var submitBtn = $('#submit-button');
-var googleAPIKey = "AIzaSyApC_HmnBEAvRsbJdOI__0QIfXjbtebdwY";
 var searchResults = $("#search-results");
 
 function formSubmission (event) {
@@ -65,7 +65,7 @@ var displayResults = function(data) {
         bookAuthor.text("Author: " + data.docs[index].author_name);
 
         var bookBorrow = $('<p>');
-        bookBorrow.text(data.docs[index].ebook_access)
+        bookBorrow.text(data.docs[index].ebook_access);
 
         resultsCard.append(bookTitle);
         resultsCard.append(bookAuthor);
