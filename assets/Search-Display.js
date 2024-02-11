@@ -263,7 +263,7 @@ var displayGoogleInfo = function (dataGoogle) {
 
         if (forSale.saleInfo.buyLink) {
             bookGoogleBuy.attr("href", forSale.saleInfo.buyLink);
-            bookGoogleBuy.text("Google Books Price: $" + forSale.saleInfo.listPrice.amount.toFixed(2));
+            bookGoogleBuy.text("Google EBooks Price: $" + forSale.saleInfo.listPrice.amount.toFixed(2));
         } 
 
     } else {

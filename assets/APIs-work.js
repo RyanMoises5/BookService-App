@@ -54,7 +54,6 @@ var getData = function (searchInput) {
                     } else {
                         displayResults(data);
                     }
-
                 });
             } else {
                 alert ('Error: ' + response.statusText);
@@ -96,7 +95,7 @@ var displayResults = function(data) {
         var resultsCard = $('<div>');
 
         var bookTitle = $('<a>');
-        bookTitle.text("Title: " + data.docs[index].title);
+        bookTitle.text(data.docs[index].title);
         var bookTitleArray = data.docs[index].title.split(" ");
         var bookTitleURL = bookTitleArray[0];
         for (let index = 1; index < bookTitleArray.length; index++) {
@@ -112,7 +111,7 @@ var displayResults = function(data) {
             for (let indexAuthor = 1; indexAuthor < data.docs[index].author_name.length; indexAuthor++) {
                 bookAuthorAll = bookAuthorAll + ", " + data.docs[index].author_name[indexAuthor];
             };
-            bookAuthor.text("Author: " + bookAuthorAll);
+            bookAuthor.text("By: " + bookAuthorAll);
 
             var bookAuthorArray = data.docs[index].author_name[0].split(" ");
             bookAuthorURL = bookAuthorArray[0];
@@ -123,16 +122,22 @@ var displayResults = function(data) {
             searchDisplayQuery = searchDisplayQuery + '&author=' + bookAuthorURL;
 
         } else {
-            bookAuthor.text("Author: Unlisted.");
+            bookAuthor.text("By: Unlisted");
         }
 
         bookTitle.attr('href', searchDisplayQuery);
+
+        var bookImg = $('<img>');
+        var coverURL = data.docs[index].cover_edition_key;
+        bookImg.attr('src', "https://covers.openlibrary.org/b/olid/" + coverURL + "-M.jpg");
+        bookImg.css({'max-width':'150px','max-height':'150px'});
 
         var bookBorrow = $('<p>');
         bookBorrow.text(data.docs[index].ebook_access);
 
         resultsCard.append(bookTitle);
         resultsCard.append(bookAuthor);
+        resultsCard.append(bookImg);
         // resultsCard.append(bookBorrow);
 
         searchResults.append(resultsCard);
@@ -164,6 +169,10 @@ var loadNYTGenres = function (dataNYT) {
     searchResults.empty();
     containerNYT.empty();
 
+    var bestSellersDate = $('<h3>');
+    bestSellersDate.text("Latest Bestseller List Publication Date: " + dataNYT.results.bestsellers_date);
+    containerNYT.append(bestSellersDate);
+
     var NYTGenreList = $('<select>');
     NYTGenreList.attr('id', 'nyt-genre');
     NYTGenreList.addClass('genre');
@@ -194,10 +203,10 @@ var loadGenreBooks = function (event) {
         bookImg.css({'max-width':'150px','max-height':'150px'});
 
         var bookTitle = $('<a>');
-        bookTitle.text("Title: " + findGenre.books[index].title);
+        bookTitle.text(findGenre.books[index].title);
 
         var bookAuthor = $('<h3>');
-        bookAuthor.text("Author: " + findGenre.books[index].author);
+        bookAuthor.text("By: " + findGenre.books[index].author);
 
         var bookTitleArray = findGenre.books[index].title.split(" ");
         var bookTitleURL = bookTitleArray[0];
@@ -226,6 +235,8 @@ var loadGenreBooks = function (event) {
         var NYTReview = 'False';
         if (findGenre.books[index].book_review_link) {
             NYTReview = findGenre.books[index].book_review_link;
+        } else if (findGenre.books[index].sunday_review_link) {
+            NYTReview = findGenre.books[index].sunday_review_link;
         };
 
         bookTitle.attr('href', './Search-Display.html?title=' + bookTitleURL + '&author=' + bookAuthorURL + '&NYTReview=' + NYTReview);
