@@ -14,17 +14,21 @@
             <div class="container-in">
                 <div class="search-container">
                     <p class="search-title">Search Book Names</p>
-                    <input type="text" id="search-input" autocomplete="off" placeholder="Search" />
-                    <button type="submit" id="submit-button">Search</button>
-                        <label for="books"></label>
-                        <select name="books" id="books">
-                            <option value=""></option>
-                            <option value="title">Title</option>
-                            <option value="author">Author</option>
-                            <option value="isbn">ISBN</option>
-                        </select>
-                    
-                    </div>
+                    <form>
+                        <input type="text" id="search-input" autocomplete="off" placeholder="Search" />
+                        <button type="submit" id="submit-button">Search</button>
+                            <label for="books"></label>
+                            <select name="books" id="books">
+                                <option value="">All</option>
+                                <option value="title">Title</option>
+                                <option value="author">Author</option>
+                                <option value="isbn">ISBN</option>
+                            </select>
+                    </form>
+
+                    <h3 id="NYT-list">Need a book? Click Here for NYT Bestsellers List</h3>
+                    <div id="NYT-container"></div>
+
                     <div id="search-results"></div>
 
                     <div id="search-data"></div>

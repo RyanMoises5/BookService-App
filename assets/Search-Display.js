@@ -6,17 +6,18 @@ var bookAuthor = $('#book-author');
 var bookPublish = $('#book-publish');
 var bookRatings = $('#book-OLratings');
 var bookEbook = $('#book-OLebook');
-var bookSnippet = $('#book-snippet');
+var bookDesc = $('#book-desc');
 var bookGoogleRating = $('#book-Googleratings');
 var bookGenre = $('#book-genre');
 var bookGooglePreview = $('#book-Googlepreview');
 var bookGoogleBuy = $('#book-Googlebuy');
+var bookNYTReview = $('#book-NYTReview');
+
+var queryString = document.location.search.split('&NYTReview=');
 
 var getData = function () {
 
-    var queryString = document.location.search
-
-    var apiURLOpenL = 'https://openlibrary.org/search.json' + queryString;
+    var apiURLOpenL = 'https://openlibrary.org/search.json' + queryString[0];
 
     console.log(apiURLOpenL);
 
@@ -41,13 +42,22 @@ var displayInfo = function (data) {
     bookCover.attr('src', "https://covers.openlibrary.org/b/olid/" + coverURL + "-M.jpg");
     bookTitle.text(data.docs[0].title);
 
-    var bookAuthorList = data.docs[0].author_name[0];
-    for (let index = 1; index < data.docs[0].author_name.length; index++) {
-        bookAuthorList = bookAuthorList + ", " + data.docs[0].author_name[index];
+    var bookAuthorList;
+    if (data.docs[0].author_name) {
+        bookAuthorList = data.docs[0].author_name[0];
+        for (let index = 1; index < data.docs[0].author_name.length; index++) {
+            bookAuthorList = bookAuthorList + ", " + data.docs[0].author_name[index];
+        }
+        bookAuthor.text(bookAuthorList);
+    } else {
+        bookAuthor.text("Author: Unlisted");
     }
 
-    bookAuthor.text(bookAuthorList);
-    bookPublish.text("First published: " + data.docs[0].first_publish_year);
+    if (data.docs[0].first_publish_year) {
+        bookPublish.text("First published: " + data.docs[0].first_publish_year);   
+    } else {
+        bookPublish.text("First published: Unavailable");
+    }
 
     if (data.docs[0].ratings_average) {
         bookRatings.text("Open Library Rating: " + data.docs[0].ratings_average.toFixed(2) + " (" + data.docs[0].ratings_count + ")");
@@ -57,9 +67,6 @@ var displayInfo = function (data) {
    
     // var bookISBN = $('<p>');
     // bookISBN.text(data.docs[0].isbn);
-
-
-    // https://openlibrary.org/search?title=three+body+problem&author=cixin
 
     
     if (data.docs[0].ebook_access == "borrowable") {
@@ -80,16 +87,23 @@ var getGoogleData = function (data) {
         bookTitleURL = bookTitleURL + "+" + bookTitleArray[index];
     }
 
-    var bookAuthorPrevURL = data.docs[0].author_name[0];
-    var bookAuthorArray = bookAuthorPrevURL.split(" ");
-    var bookAuthorURL = bookAuthorArray[0];
-    for (let index = 1; index < bookAuthorArray.length; index++) {
-        bookAuthorURL = bookAuthorURL + "+" + bookAuthorArray[index];
+    var bookEBookSearch = "https://openlibrary.org/search?title=" + bookTitleURL;
+    var apiURLGoogle = 'https://www.googleapis.com/books/v1/volumes?q=' + bookTitleURL;
+
+    if (data.docs[0].author_name) {
+        var bookAuthorPrevURL = data.docs[0].author_name[0];
+        var bookAuthorArray = bookAuthorPrevURL.split(" ");
+        var bookAuthorURL = bookAuthorArray[0];
+        for (let index = 1; index < bookAuthorArray.length; index++) {
+            bookAuthorURL = bookAuthorURL + "+" + bookAuthorArray[index];
+        }
+        apiURLGoogle = apiURLGoogle + "+inauthor:" + bookAuthorURL;
+        bookEBookSearch = bookEBookSearch + "&author=" + bookAuthorURL
     }
 
-    bookEbook.attr("href", "https://openlibrary.org/search?title=" + bookTitleURL + "&author=" + bookAuthorURL);
+    bookEbook.attr("href", bookEBookSearch);
 
-    var apiURLGoogle = 'https://www.googleapis.com/books/v1/volumes?q=' + bookTitleURL + "+inauthor:" + bookAuthorURL + "&maxResults=20" + "&orderBy=relevance" + "&key=" + googleAPIKey;
+    apiURLGoogle = apiURLGoogle + "&maxResults=20" + "&orderBy=relevance" + "&key=" + googleAPIKey;
 
     console.log(apiURLGoogle);
 
@@ -224,10 +238,10 @@ var displayGoogleInfo = function (dataGoogle) {
     });
 
     if (forSale) {
-        bookSnippet.text(forSale.searchInfo.textSnippet);
+        bookDesc.text(forSale.volumeInfo.description);
 
         if (forSale.volumeInfo.averageRating) {
-            bookGoogleRating.text("Google Books Rating: " + forSale.volumeInfo.averageRating + " (" + forSale.volumeInfo.ratingsCount + ")");
+            bookGoogleRating.text("Google Books Rating: " + forSale.volumeInfo.averageRating.toFixed(2) + " (" + forSale.volumeInfo.ratingsCount + ")");
         } else {
             bookGoogleRating.text("Google Books Rating: Unavailable");
         }
@@ -249,7 +263,7 @@ var displayGoogleInfo = function (dataGoogle) {
 
         if (forSale.saleInfo.buyLink) {
             bookGoogleBuy.attr("href", forSale.saleInfo.buyLink);
-            bookGoogleBuy.text("Google Books Price: $" + forSale.saleInfo.listPrice.amount);
+            bookGoogleBuy.text("Google Books Price: $" + forSale.saleInfo.listPrice.amount.toFixed(2));
         } 
 
     } else {
@@ -258,5 +272,10 @@ var displayGoogleInfo = function (dataGoogle) {
         bookGooglePreview.text(" ");
         bookGoogleBuy.text(" ");
     }};
+
+if (queryString.length > 1 && queryString[1] != "False") {
+    bookNYTReview.text("Click here for New York Times Review.")
+    bookNYTReview.attr("href", queryString[1]);
+}
 
 getData();
