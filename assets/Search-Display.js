@@ -18,6 +18,8 @@ var getData = function () {
 
     var apiURLOpenL = 'https://openlibrary.org/search.json' + queryString;
 
+    console.log(apiURLOpenL);
+
     fetch(apiURLOpenL)
         .then(function (response) {
             if (response.ok) {
@@ -28,7 +30,7 @@ var getData = function () {
                     displayInfo(data);
                 });
             } else {
-                console.log('Error: ' + response.statusText);
+                console.log ('Error: ' + response.statusText);
             }
         })
 };
@@ -87,7 +89,9 @@ var getGoogleData = function (data) {
 
     bookEbook.attr("href", "https://openlibrary.org/search?title=" + bookTitleURL + "&author=" + bookAuthorURL);
 
-    var apiURLGoogle = 'https://www.googleapis.com/books/v1/volumes?q=' + bookTitleURL + "+inauthor:" + bookAuthorURL + "&orderBy=relevance" + "&key=" + googleAPIKey;
+    var apiURLGoogle = 'https://www.googleapis.com/books/v1/volumes?q=' + bookTitleURL + "+inauthor:" + bookAuthorURL + "&maxResults=20" + "&orderBy=relevance" + "&key=" + googleAPIKey;
+
+    console.log(apiURLGoogle);
 
     fetch(apiURLGoogle)
         .then(function (response) {
