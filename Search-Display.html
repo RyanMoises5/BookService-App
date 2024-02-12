@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./assets/style.css" /> -->
+    <title>Search Display</title>
+</head>
+
+<body>
+    <h1>Showing Information for:<span id="title-name"></span></h1>
+    <div id="search-container">                    
+        <img id="book-cover"></img>
+        <h1 id="book-title"></h1>
+        <h3 id="book-author"></h3>
+        <p id="book-snippet"></p>
+        <p id="book-publish"></p>
+        <p id="book-genre"></p>
+        <p id="book-OLratings"></p>
+        <a id="book-OLebook"></a>
+        <p id="book-Googleratings"></p>
+        <a id="book-Googlepreview"></a>
+        <br></br>
+        <a id="book-Googlebuy"></a>
+    </div>
+      
+
+
+    <!-- Jquery -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+
+    <script src="./assets/Search-Display.js"></script>
+    <!-- <script src="./assets/SearchBar.js"></script> -->
+
+    <!-- 
+        Test Fetch Requests, ignore for now
+     -->
+
+
+    <!-- <script> fetch ("https://api.nytimes.com/svc/books/v3/reviews.json?author=Michelle+Obama&api-key=QufXlA6hoaa3M0mhKCFopThskTA8qxG3 ")
+        </script> -->
+                    <!--  NYT: reviews  -->
+
+    <!-- <script> fetch ("https://openlibrary.org/search.json?title=the+lord+of+the+rings");</script> -->
+                    <!-- Open library: average rating -->
+                
+        
+    <!-- <script>fetch ("https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyApC_HmnBEAvRsbJdOI__0QIfXjbtebdwY");
+    </script> -->
+                    <!-- google books: average rating -->
+    
+
+</body>
+
+</html>
