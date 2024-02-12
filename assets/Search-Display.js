@@ -77,7 +77,7 @@ var displayInfo = function (data) {
     }
 
     getGoogleData(data);
-}
+};
 
 var getGoogleData = function (data) {
 
@@ -272,17 +272,18 @@ var displayGoogleInfo = function (dataGoogle) {
         bookGenre.text("Genre: Unlisted");
         bookGooglePreview.text(" ");
         bookGoogleBuy.text(" ");
-    }};
+    }
+};
+
+var returnToIndex = function (event) {
+    window.location.href = "./index.html";
+};
+
+getData();
 
 if (queryString.length > 1 && queryString[1] != "False") {
     bookNYTReview.text("Click here for New York Times Review.")
     bookNYTReview.attr("href", queryString[1]);
-}
-
-var returnToIndex = function (event) {
-    window.location.href = "./index.html";
-}
-
-getData();
+};
 
 backBtn.on('click', returnToIndex)
