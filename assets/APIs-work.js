@@ -7,7 +7,6 @@ var containerNYT = $('#NYT-container');
 var loadNYT = $('#NYT-list');
 var loadLocalStorage = $('#local-storage');
 var eraseLocalStorage = $('#clear-storage');
-var saveList = $('#save-list');
 
 var dataNYTGlobal;
 var saveListItems = [];
@@ -356,6 +355,9 @@ var eraseSaveList = function () {
 
     saveListItems = [];
     localStorage.setItem("savedItems", JSON.stringify(saveListItems));
+
+    searchResults.empty();
+    containerNYT.empty();
 };
 
 submitBtn.on("click", formSubmission);
@@ -364,5 +366,5 @@ loadNYT.on("click", loadNYTList);
 containerNYT.on("click", '.genre', loadGenreBooks);
 
 loadLocalStorage.on("click", loadSaveList);
-eraseLocalStorage.on('click', eraseSaveList);
 searchResults.on("click", '.save-button', saveEntry);
+eraseLocalStorage.on('click', eraseSaveList);
