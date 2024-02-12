@@ -12,6 +12,7 @@ var bookGenre = $('#book-genre');
 var bookGooglePreview = $('#book-Googlepreview');
 var bookGoogleBuy = $('#book-Googlebuy');
 var bookNYTReview = $('#book-NYTReview');
+var backBtn = $('#back-button');
 
 var queryString = document.location.search.split('&NYTReview=');
 
@@ -278,4 +279,10 @@ if (queryString.length > 1 && queryString[1] != "False") {
     bookNYTReview.attr("href", queryString[1]);
 }
 
+var returnToIndex = function (event) {
+    window.location.href = "./index.html";
+}
+
 getData();
+
+backBtn.on('click', returnToIndex)

@@ -6,8 +6,12 @@ var searchCategory = $('#books');
 var containerNYT = $('#NYT-container');
 var loadNYT = $('#NYT-list');
 var dataNYTGlobal;
+var loadLocalStorage = $('#local-storage');
+var eraseLocalStorage = $('#clear-storage');
+var saveList = $('#save-list');
+var saveListItems = [];
 
-function formSubmission (event) {
+var formSubmission = function (event) {
     event.preventDefault()
 
     var searchInput = searchTerm.val().trim();
@@ -90,6 +94,11 @@ var ISBNToTitleAuthor = function(data) {
 
 var displayResults = function(data) {
 
+    var savedHeader = $('<h2>')
+    savedHeader.text('Showing Search Results:')
+
+    searchResults.append(savedHeader);
+
     for (let index = 0; index < data.docs.length; index++) {
 
         var resultsCard = $('<div>');
@@ -132,13 +141,20 @@ var displayResults = function(data) {
         bookImg.attr('src', "https://covers.openlibrary.org/b/olid/" + coverURL + "-M.jpg");
         bookImg.css({'max-width':'150px','max-height':'150px'});
 
-        var bookBorrow = $('<p>');
-        bookBorrow.text(data.docs[index].ebook_access);
+        var bookSave = $('<button>');
+        bookSave.text("Save this item");
+        bookSave.addClass('save-button');
+        bookSave.attr('index', index);
+        bookSave.attr('data-title', bookTitle.text());
+        bookSave.attr('data-author', bookAuthor.text());
+        bookSave.attr('data-search', searchDisplayQuery);
+        bookSave.attr('data-img', bookImg.attr('src'));
 
         resultsCard.append(bookTitle);
         resultsCard.append(bookAuthor);
         resultsCard.append(bookImg);
-        // resultsCard.append(bookBorrow);
+        resultsCard.append('<br>');
+        resultsCard.append(bookSave);
 
         searchResults.append(resultsCard);
     };
@@ -169,8 +185,8 @@ var loadNYTGenres = function (dataNYT) {
     searchResults.empty();
     containerNYT.empty();
 
-    var bestSellersDate = $('<h3>');
-    bestSellersDate.text("Latest Bestseller List Publication Date: " + dataNYT.results.bestsellers_date);
+    var bestSellersDate = $('<h4>');
+    bestSellersDate.text("Latest Publication Date: " + dataNYT.results.bestsellers_date);
     containerNYT.append(bestSellersDate);
 
     var NYTGenreList = $('<select>');
@@ -189,6 +205,11 @@ var loadNYTGenres = function (dataNYT) {
 var loadGenreBooks = function (event) {
 
     searchResults.empty();
+
+    var savedHeader = $('<h2>')
+    savedHeader.text('Showing NYT List:')
+
+    searchResults.append(savedHeader);
 
     var targetGenre = event.target.value;
     var findGenre = dataNYTGlobal.results.lists.find(function(genre) {
@@ -239,7 +260,9 @@ var loadGenreBooks = function (event) {
             NYTReview = findGenre.books[index].sunday_review_link;
         };
 
-        bookTitle.attr('href', './Search-Display.html?title=' + bookTitleURL + '&author=' + bookAuthorURL + '&NYTReview=' + NYTReview);
+        var searchDisplayQuery = './Search-Display.html?title=' + bookTitleURL + '&author=' + bookAuthorURL + '&NYTReview=' + NYTReview;
+
+        bookTitle.attr('href', searchDisplayQuery);
 
         var bookDesc = $('<p>');
         bookDesc.text(findGenre.books[index].description);
@@ -247,17 +270,95 @@ var loadGenreBooks = function (event) {
         var bookWeeks = $('<p>');
         bookWeeks.text("Weeks on list: " + findGenre.books[index].weeks_on_list);
 
+        var bookSave = $('<button>');
+        bookSave.text("Save this item");
+        bookSave.addClass('save-button');
+        bookSave.attr('index', index);
+        bookSave.attr('data-title', bookTitle.text());
+        bookSave.attr('data-author', bookAuthor.text());
+        bookSave.attr('data-search', searchDisplayQuery);
+        bookSave.attr('data-img', bookImg.attr('src'));
+
         resultsCard.append(bookTitle);
         resultsCard.append(bookAuthor);
         resultsCard.append(bookImg);
         resultsCard.append(bookDesc);
         resultsCard.append(bookWeeks);
+        resultsCard.append(bookSave);
 
         searchResults.append(resultsCard);
     }
 }
 
+var loadSaveList = function (event) {
+    var saveData = JSON.parse(localStorage.getItem("savedItems"));
+
+    if (saveData !== null) {
+        saveListItems = saveData;
+    };
+
+    renderSavedEntries(saveListItems);
+};
+
+var renderSavedEntries = function (saveListItems) {
+    
+    searchResults.empty();
+    containerNYT.empty();
+
+    var savedHeader = $('<h2>')
+    savedHeader.text('Showing User List:')
+
+    searchResults.append(savedHeader);
+
+    for (let index = 0; index < saveListItems.length; index++) {
+        var resultsCard = $('<div>');
+
+        var bookImg = $('<img>');
+        bookImg.attr('src', saveListItems[index].img);
+        bookImg.css({'max-width':'150px','max-height':'150px'});
+
+        var bookTitle = $('<a>');
+        bookTitle.text(saveListItems[index].title);
+        bookTitle.attr('href', (saveListItems[index].search));
+
+        var bookAuthor = $('<h3>');
+        bookAuthor.text(saveListItems[index].author);
+
+        resultsCard.append(bookTitle);
+        resultsCard.append(bookAuthor);
+        resultsCard.append(bookImg);
+
+        searchResults.append(resultsCard);
+        searchResults.append('<br>');
+    }
+}
+
+var saveEntry = function (event) {
+
+    var saveDetails = {
+        title: event.target.dataset.title,
+        author: event.target.dataset.author,
+        search: event.target.dataset.search,
+        img: event.target.dataset.img,
+    };
+
+    saveListItems.push(saveDetails);
+
+    localStorage.setItem('savedItems', JSON.stringify(saveListItems));
+};
+
+var eraseSaveList = function () {
+
+    saveListItems = [];
+    localStorage.setItem("savedItems", JSON.stringify(saveListItems));
+}
+
+submitBtn.on("click", formSubmission);
+
 loadNYT.on("click", loadNYTList);
 containerNYT.on("click", '.genre', loadGenreBooks);
 
-submitBtn.on("click", formSubmission);
+loadLocalStorage.on("click", loadSaveList);
+eraseLocalStorage.on('click', eraseSaveList);
+
+searchResults.on("click", '.save-button', saveEntry);
