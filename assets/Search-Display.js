@@ -63,7 +63,7 @@ var displayInfo = function (data) {
     if (data.docs[0].ratings_average) {
         bookRatings.text("Open Library Rating: " + data.docs[0].ratings_average.toFixed(2) + " (" + data.docs[0].ratings_count + ")");
     } else {
-        bookRatings.text("Open Library Rating: Unavailable")
+        bookRatings.text("Open Library Rating: Unrated")
     }
    
     // var bookISBN = $('<p>');
@@ -71,7 +71,7 @@ var displayInfo = function (data) {
 
     
     if (data.docs[0].ebook_access === "borrowable" || data.docs[0].ebook_access === "public") {
-        bookEbook.text("Borrowable on Open Library. Click to search");
+        bookEbook.text("Free EBook borrowable on Open Library. Click to search");
     } else {
         bookEbook.text("Unavailable on Open Library.");
     }
@@ -135,7 +135,7 @@ var displayGoogleInfo = function (dataGoogle) {
         if (forSale.volumeInfo.averageRating) {
             bookGoogleRating.text("Google Books Rating: " + forSale.volumeInfo.averageRating.toFixed(2) + " (" + forSale.volumeInfo.ratingsCount + ")");
         } else {
-            bookGoogleRating.text("Google Books Rating: Unavailable");
+            bookGoogleRating.text("Google Books Rating: Unrated");
         }
 
         if (forSale.volumeInfo.categories) {
@@ -159,7 +159,7 @@ var displayGoogleInfo = function (dataGoogle) {
         } 
 
     } else {
-        bookGoogleRating.text("Google Books Rating: Unavailable");
+        bookGoogleRating.text("Google Books Rating: Unrated");
         bookGenre.text("Genre: Unlisted");
         bookGooglePreview.text(" ");
         bookGoogleBuy.text(" ");

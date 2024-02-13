@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css" />
-    <title>Search Display</title>
+    <title>Search Results</title>
 </head>
 
 <body>
+    <!-- Button to return back to index.html -->
     <button id="back-button">Return to Front</button>
     <div class="topnav">
         <div class="search-container">
+
+            <!-- Left page filled with basic book information, description, and cover image -->
             <div id="leftpage">
                 <h1>Showing Information for:<span id="title-name"></span></h1>
                 <img id="book-cover"></img>
@@ -20,7 +23,10 @@
                 <p id="book-publish"></p>
                 <p id="book-genre"></p>
             </div>
+        
         </div>
+
+        <!-- Right page filled with book ratings and review links -->
         <div id="rightpage">
             <p id="book-OLratings"></p>
             <a id="book-OLebook"></a>
@@ -32,18 +38,11 @@
             <a id="book-NYTReview"></a>
         </div>
     </div>
-      
-
-
+    
     <!-- Jquery -->
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
 
-    
-    <script src="./assets/Search-Display.js"></script>
-    <!-- <script src="./assets/SearchBar.js"></script> -->
-    
+    <script src="./assets/Search-Display.js"></script> 
 
 </body>
-
 </html>
