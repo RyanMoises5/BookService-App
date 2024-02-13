@@ -1,6 +1,8 @@
 
 body {
     background-color: rgb(2, 126, 193);
+    font-size: 15px;
+    color: #103f6e;
 }
 /* outer container */
 .topnav {
@@ -40,12 +42,13 @@ body {
     background-color: rgb(246, 236, 176);
 }
 /* buttons */
-#submit-button, #books {
+button, #submit-button, #books {
     justify-content: center;
     background-color: rgb(0, 160, 200);
     color: #d3fbff;
     padding: 5px;
     margin: 3px;
+    margin-bottom: 25px;
     border-radius: 6px;
     border: 0px;
 
@@ -53,7 +56,10 @@ body {
 #search-input:focus {
     outline: none;
 }
-
+/* local storage */
+#local-storage, #clear-storage, #savelist, #NYT-list, #NYT-container {
+    margin: 10px;
+}
 /* left page */
 .search-container {
     background: linear-gradient(90deg, rgb(255, 227, 117) 0%, rgb(255, 237, 179) 90%, rgb(255, 242, 157) 100%); 
@@ -67,8 +73,11 @@ body {
     -4px 4px 0px 4px rgb(172, 154, 80),
     9px 9px 9px rgb(51, 2, 2);
 }
+#leftpage {
+    margin-left: 20px;
+}
 /* right page */
-#search-results {
+#rightpage {
     background: linear-gradient(90deg, rgb(255, 227, 117) 0%, rgb(255, 237, 179) 10%, rgb(255, 242, 157) 100%);
     float: right;
     margin-right: 2vw;
@@ -77,16 +86,24 @@ body {
     padding-top: 5px;
     padding-left: 4vw;
     width: 42svw;
+    height: auto;
     height: 90.5vh;
     box-shadow: 2px 2px 0px 2px rgb(223, 199, 104),
     4px 4px 0px 4px rgb(172, 154, 80),
     9px 9px 9px rgb(51, 2, 2);
 }
-/* search results formatting */
-#search-results, h1 {
-    font-size: 12px;
-    color: #1d1c2a;
+#search-results {
+    background: linear-gradient(90deg, rgb(255, 227, 117) 0%, rgb(255, 237, 179) 10%, rgb(255, 242, 157) 100%);
+    float: right;
+    margin-right: 0vw;
+    border-top-left-radius: 50px 20px;
+    border-top-right-radius: 800px 10px;
+    padding-top: 5px;
+    padding-left: 4vw;
+    width: 42svw;
+    height: auto;
 }
+
 .search-item {
     color: white;
     cursor: pointer;
