@@ -57,11 +57,4 @@ Display Page of the Book Service App:
 
 ---
 
-* Have a clean repository that meets quality coding standards (file structure,).
-
-## Grading Requirements
-
-This project is graded based on the following criteria:
-
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
+Group 4: Aaron Porter-Brooks, Michael Anthony Rodriguez, Ryan Moises 
