@@ -49,11 +49,11 @@ The following link is the Github repository where the associated files are locat
 
 Front Page of the Book Service App:
 
-![Front Page of the Book Service App](.\assets\Samples\BookServiceIndex.JPG)
+![Front Page of the Book Service App](./assets/Samples/BookServiceIndex.JPG)
 
 Display Page of the Book Service App:
 
-![Display Page of the Book Service App](.\assets\Samples\BookServiceDisplay.JPG)
+![Display Page of the Book Service App](./assets/Samples/BookServiceDisplay.JPG)
 
 ---
 
