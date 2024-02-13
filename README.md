@@ -41,7 +41,7 @@ Foundation Framework for CSS
 
 ## URLs and Images 
 
-The following link is the students' URL to the completed assignment:
+The following link is the group's URL to the completed assignment:
 (https://ryanmoises5.github.io/BookService-Group4-Project1/)
 
 The following link is the Github repository where the associated files are located:
@@ -57,36 +57,11 @@ Display Page of the Book Service App:
 
 ---
 
-* Does not use alerts, confirms, or prompts (use modals).
-
-* Have a clean repository that meets quality coding standards (file structure, naming conventions, follows best practices for class/id naming conventions, indentation, quality comments, etc.).
+* Have a clean repository that meets quality coding standards (file structure,).
 
 ## Grading Requirements
 
 This project is graded based on the following criteria:
 
-### Technical Acceptance Criteria: 25%
-
-* Satisfies the following code requirements:
-
-  * Application doesn't use JS alerts, prompts, or confirms (uses modals instead).
-
-### Repository Quality: 10%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
 
 * Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains a quality README file with description, screenshot, and link to deployed application.
-
-## How to Submit Your Interactive Front-End Project
-
-**Each member of your group** is required to submit the following for review:
-
-* The URL of the deployed application.
-
-* The URL of the GitHub repository, with a unique name and a README describing the project.

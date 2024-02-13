@@ -14,13 +14,13 @@ var bookGoogleBuy = $('#book-Googlebuy');
 var bookNYTReview = $('#book-NYTReview');
 var backBtn = $('#back-button');
 
-var queryString = document.location.search.split('&NYTReview=');
+var queryString = document.location.search.split('&NYTReview='); // Gathers URL to be used to perform fetch requests
 
-var getData = function () {
+var getData = function () { // Fetch request to OpenLibrary and adds info to page using received data
 
     var apiURLOpenL = 'https://openlibrary.org/search.json' + queryString[0];
 
-    console.log(apiURLOpenL);
+    console.log("Fetch: " + apiURLOpenL);
 
     fetch(apiURLOpenL)
         .then(function (response) {
@@ -37,7 +37,7 @@ var getData = function () {
         })
 };
 
-var displayInfo = function (data) {
+var displayInfo = function (data) { // Uses fetch request to add info to the page, then makes a fetch request to Google for more info
 
     var coverURL = data.docs[0].cover_edition_key
     bookCover.attr('src', "https://covers.openlibrary.org/b/olid/" + coverURL + "-M.jpg");
@@ -65,11 +65,7 @@ var displayInfo = function (data) {
     } else {
         bookRatings.text("Open Library Rating: Unrated")
     }
-   
-    // var bookISBN = $('<p>');
-    // bookISBN.text(data.docs[0].isbn);
-
-    
+       
     if (data.docs[0].ebook_access === "borrowable" || data.docs[0].ebook_access === "public") {
         bookEbook.text("Free EBook borrowable on Open Library. Click to search");
     } else {
@@ -79,7 +75,7 @@ var displayInfo = function (data) {
     getGoogleData(data);
 };
 
-var getGoogleData = function (data) {
+var getGoogleData = function (data) { // URL for fetch request to Google Books formulated
 
     var bookTitlePrevURL = data.docs[0].title;
     var bookTitleArray = bookTitlePrevURL.split(" ");
@@ -106,7 +102,7 @@ var getGoogleData = function (data) {
 
     apiURLGoogle = apiURLGoogle + "&maxResults=20" + "&orderBy=relevance" + "&key=" + googleAPIKey;
 
-    console.log(apiURLGoogle);
+    console.log("Fetch: " + apiURLGoogle);
 
     fetch(apiURLGoogle)
         .then(function (response) {
@@ -123,7 +119,7 @@ var getGoogleData = function (data) {
         })
 };
 
-var displayGoogleInfo = function (dataGoogle) {
+var displayGoogleInfo = function (dataGoogle) {  // Takes Google data, searches for an item of a purchaseable ebook, then adds information to the page
 
     var forSale = dataGoogle.items.find(function(book) {
         return book.saleInfo.saleability === 'FOR_SALE';
@@ -166,15 +162,15 @@ var displayGoogleInfo = function (dataGoogle) {
     }
 };
 
-var returnToIndex = function (event) {
+var returnToIndex = function (event) { // Button to return to first page
     window.location.href = "./index.html";
 };
 
-getData();
+getData(); // Uses URL to fetch data and display results when page is loaded
 
-if (queryString.length > 1 && queryString[1] != "False") {
+if (queryString.length > 1 && queryString[1] != "False") {  // Indicates if NYT Review is available
     bookNYTReview.text("Click here for New York Times Review.")
     bookNYTReview.attr("href", queryString[1]);
 };
 
-backBtn.on('click', returnToIndex)
+backBtn.on('click', returnToIndex) // Click event to return to first page
