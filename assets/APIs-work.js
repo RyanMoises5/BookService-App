@@ -10,6 +10,7 @@ var loadLocalStorage = $('#local-storage');
 var eraseLocalStorage = $('#clear-storage');
 var saveList = $('#save-list');
 var saveListItems = [];
+var modal = $('modal')
 
 var formSubmission = function (event) {
     event.preventDefault()
@@ -348,11 +349,24 @@ var saveEntry = function (event) {
 };
 
 var eraseSaveList = function () {
-
-    saveListItems = [];
-    localStorage.setItem("savedItems", JSON.stringify(saveListItems));
+    var x = document.getElementById("modal");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
 }
 
+var eraseListSafe = function () {
+    saveListItems = [];
+    localStorage.setItem("savedItems", JSON.stringify(saveListItems));
+        var x = document.getElementById("modal");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 submitBtn.on("click", formSubmission);
 
 loadNYT.on("click", loadNYTList);
@@ -360,5 +374,6 @@ containerNYT.on("click", '.genre', loadGenreBooks);
 
 loadLocalStorage.on("click", loadSaveList);
 eraseLocalStorage.on('click', eraseSaveList);
+
 
 searchResults.on("click", '.save-button', saveEntry);
