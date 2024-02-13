@@ -6,7 +6,7 @@ body {
 .topnav {
     background-color: rgb(25, 63, 112);
     margin: 5px;
-    width: 94vw;
+    width: 95vw;
     height: 92vh;
     border-radius: 3px;
     box-shadow: 9px 9px 5px rgba(36, 48, 111, 0.414);
@@ -62,7 +62,7 @@ body {
     border-top-right-radius: 50px 20px;
     border-top-left-radius: 800px 10px;
     width: 45vw;
-    height: 90vh;
+    height: 91vh;
     box-shadow: -2px 2px 0px 2px rgb(223, 199, 104),
     -4px 4px 0px 4px rgb(172, 154, 80),
     9px 9px 9px rgb(51, 2, 2);
@@ -75,13 +75,12 @@ body {
     border-top-left-radius: 50px 20px;
     border-top-right-radius: 800px 10px;
     padding-top: 5px;
-    padding-left: 3vw;
+    padding-left: 4vw;
     width: 42svw;
-    height: 89.5vh;
+    height: 90.5vh;
     box-shadow: 2px 2px 0px 2px rgb(223, 199, 104),
     4px 4px 0px 4px rgb(172, 154, 80),
     9px 9px 9px rgb(51, 2, 2);
-
 }
 /* search results formatting */
 #search-results, h1 {
