@@ -9,7 +9,7 @@ body {
     background-color: rgb(25, 63, 112);
     margin: 5px;
     width: 95vw;
-    height: 92vh;
+    height: 93vh;
     border-radius: 3px;
     box-shadow: 9px 9px 5px rgba(36, 48, 111, 0.414);
 }
@@ -42,9 +42,9 @@ body {
     background-color: rgb(246, 236, 176);
 }
 /* buttons */
-button, #submit-button, #books {
+button, #submit-button, #books, #local-storage, #clear-storage, #savelist, #NYT-list {
     justify-content: center;
-    background-color: rgb(0, 160, 200);
+    background-color: #556af0;
     color: #d3fbff;
     padding: 5px;
     margin: 3px;
@@ -59,6 +59,16 @@ button, #submit-button, #books {
 /* local storage */
 #local-storage, #clear-storage, #savelist, #NYT-list, #NYT-container {
     margin: 10px;
+    width: auto;
+}
+.button{
+    background-color: #556af0;
+    color: #d3fbff;
+}
+.button:hover {
+    content: ' ';
+    background-color: #d3fbff;
+    color: #556af0;
 }
 /* left page */
 .search-container {
