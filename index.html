@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
     <div class="topnav">
         <div class="container-out">
             <div class="container-in">
@@ -25,12 +24,22 @@
                                 <option value="isbn">ISBN</option>
                             </select>
                     </form>
-                    <h5 id="local-storage">Load Saved Entries</h5>
-                    <h5 id="clear-storage">Clear Save List</h5>
 
-                    <h3 id="NYT-list">Need a book? Click Here for NYT Bestsellers List</h3>
+                    <h5 class="button" id="local-storage">Load Saved Entries</h5>
+                    <h5 class="button" id="clear-storage">Clear Save List</h5>
+                    <div class="button" id="save-list"></div>
+
+                    <h3 class="button" id="NYT-list">Need a book? Click Here for NYT Bestsellers List</h3>
                     <div id="NYT-container"></div>
 
+                    <div id="modal">
+                        <h1>Are You Sure?</h1>
+                        <button onclick="eraseListSafe()">yes</button>
+                        <button onclick="eraseSaveList()">no</button>
+                    </div>
+                    
+                </div>
+                <div id="rightpage">
                     <div id="search-results"></div>
                 </div>
             </div>
