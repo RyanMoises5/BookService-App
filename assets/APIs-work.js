@@ -5,10 +5,10 @@ var searchResults = $("#search-results");
 var searchCategory = $('#books');
 var containerNYT = $('#NYT-container');
 var loadNYT = $('#NYT-list');
-var dataNYTGlobal;
 var loadLocalStorage = $('#local-storage');
 var eraseLocalStorage = $('#clear-storage');
-var saveList = $('#save-list');
+
+var dataNYTGlobal;
 var saveListItems = [];
 var modal = $('modal')
 
@@ -22,7 +22,7 @@ var formSubmission = function (event) {
     } else {
         alert('Please enter a search term');
     }
-}
+};
 
 var getData = function (searchInput) {
 
@@ -91,7 +91,7 @@ var ISBNToTitleAuthor = function(data) {
                 alert ('Error: ' + response.statusText);
             }
         });
-}
+};
 
 var displayResults = function(data) {
 
@@ -179,7 +179,7 @@ var loadNYTList = function () {
                 alert ('Error: ' + response.statusText);
             }
         });
-}
+};
 
 var loadNYTGenres = function (dataNYT) {
 
@@ -201,7 +201,7 @@ var loadNYTGenres = function (dataNYT) {
         NYTEl.attr('value', dataNYT.results.lists[index].list_name_encoded);
         NYTGenreList.append(NYTEl);
     }
-}
+};
 
 var loadGenreBooks = function (event) {
 
@@ -255,10 +255,13 @@ var loadGenreBooks = function (event) {
         };
 
         var NYTReview = 'False';
+        var NYTReviewNote = $('<p>');
         if (findGenre.books[index].book_review_link) {
             NYTReview = findGenre.books[index].book_review_link;
+            NYTReviewNote.text("NYT Review Available");
         } else if (findGenre.books[index].sunday_review_link) {
             NYTReview = findGenre.books[index].sunday_review_link;
+            NYTReviewNote.text("NYT Review Available");
         };
 
         var searchDisplayQuery = './Search-Display.html?title=' + bookTitleURL + '&author=' + bookAuthorURL + '&NYTReview=' + NYTReview;
@@ -285,11 +288,12 @@ var loadGenreBooks = function (event) {
         resultsCard.append(bookImg);
         resultsCard.append(bookDesc);
         resultsCard.append(bookWeeks);
+        resultsCard.append(NYTReviewNote);
         resultsCard.append(bookSave);
 
         searchResults.append(resultsCard);
     }
-}
+};
 
 var loadSaveList = function (event) {
     var saveData = JSON.parse(localStorage.getItem("savedItems"));
@@ -332,7 +336,7 @@ var renderSavedEntries = function (saveListItems) {
         searchResults.append(resultsCard);
         searchResults.append('<br>');
     }
-}
+};
 
 var saveEntry = function (event) {
 
@@ -360,6 +364,7 @@ var eraseSaveList = function () {
 var eraseListSafe = function () {
     saveListItems = [];
     localStorage.setItem("savedItems", JSON.stringify(saveListItems));
+
         var x = document.getElementById("modal");
     if (x.style.display === "none") {
         x.style.display = "block";
@@ -367,6 +372,7 @@ var eraseListSafe = function () {
         x.style.display = "none";
     }
 }
+
 submitBtn.on("click", formSubmission);
 
 loadNYT.on("click", loadNYTList);
@@ -375,5 +381,5 @@ containerNYT.on("click", '.genre', loadGenreBooks);
 loadLocalStorage.on("click", loadSaveList);
 eraseLocalStorage.on('click', eraseSaveList);
 
-
 searchResults.on("click", '.save-button', saveEntry);
+eraseLocalStorage.on('click', eraseSaveList);
