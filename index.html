@@ -14,19 +14,24 @@
             <div class="container-in">
                 <div class="search-container">
                     <p class="search-title">Search Book Names</p>
-                    <input type="text" id="search-input" autocomplete="off" placeholder="Search" />
-                    <button type="submit" id="submit-button">Search</button>
-                        <label for="books"></label>
-                        <select name="books" id="books">
-                          <option value="Title">Title</option>
-                          <option value="Author">Author</option>
-                          <option value="ISBN">ISBN</option>
-                        </select>
-                    
-                    </div>
-                    <div id="search-results"></div>
+                    <form>
+                        <input type="text" id="search-input" autocomplete="off" placeholder="Search" />
+                        <button type="submit" id="submit-button">Search</button>
+                            <label for="books"></label>
+                            <select name="books" id="books">
+                                <option value="">All</option>
+                                <option value="title">Title</option>
+                                <option value="author">Author</option>
+                                <option value="isbn">ISBN</option>
+                            </select>
+                    </form>
+                    <h5 id="local-storage">Load Saved Entries</h5>
+                    <h5 id="clear-storage">Clear Save List</h5>
 
-                    <div id="search-data"></div>
+                    <h3 id="NYT-list">Need a book? Click Here for NYT Bestsellers List</h3>
+                    <div id="NYT-container"></div>
+
+                    <div id="search-results"></div>
                 </div>
             </div>
         </div>
@@ -56,7 +61,8 @@
     </script> -->
                     <!-- google books: average rating -->
     
+    <!-- <script> fetch ('https://catalog.hathitrust.org/api/volumes/full/isbn/1635574102.json')</script> -->
+    <!-- <script>fetch('https://openlibrary.org/isbn/9780140328721.json')</script> -->
 
 </body>
-
 </html>
